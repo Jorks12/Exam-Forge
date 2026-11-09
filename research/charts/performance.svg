@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title" viewBox="0 0 760 440">
+    <title id="title">Време за подбор на 20 въпроса</title><rect width="760" height="440" fill="white"/>
+    <g font-family="Segoe UI, Arial, sans-serif" fill="#172743" font-size="13">
+      <text x="36" y="40" font-size="23" font-weight="700">Време за подбор на 20 въпроса</text><text x="36" y="65">Медиана в микросекунди · 1000 повторения</text>
+      <line x1="84" y1="355" x2="710" y2="355" stroke="#dfe5ef"/>
+    <text x="74" y="359" text-anchor="end">0</text><line x1="84" y1="301.2" x2="710" y2="301.2" stroke="#dfe5ef"/>
+    <text x="74" y="305.2" text-anchor="end">8</text><line x1="84" y1="247.39999999999998" x2="710" y2="247.39999999999998" stroke="#dfe5ef"/>
+    <text x="74" y="251.39999999999998" text-anchor="end">16</text><line x1="84" y1="193.6" x2="710" y2="193.6" stroke="#dfe5ef"/>
+    <text x="74" y="197.6" text-anchor="end">24</text><line x1="84" y1="139.79999999999998" x2="710" y2="139.79999999999998" stroke="#dfe5ef"/>
+    <text x="74" y="143.79999999999998" text-anchor="end">32</text><line x1="84" y1="86" x2="710" y2="86" stroke="#dfe5ef"/>
+    <text x="74" y="90" text-anchor="end">40</text><rect x="146.33333333333331" y="338.18749999991974" width="38" height="16.812500000080263" fill="#2859ce"/>
+        <text x="165.33333333333331" y="331.18749999991974" text-anchor="middle">2.5</text><rect x="192.33333333333331" y="281.0250000000291" width="38" height="73.97499999997092" fill="#108371"/>
+        <text x="211.33333333333331" y="274.0250000000291" text-anchor="middle">11</text><text x="188.33333333333331" y="378" text-anchor="middle">120 въпроса</text><rect x="355" y="311.96000000000475" width="38" height="43.039999999995246" fill="#2859ce"/>
+        <text x="374" y="304.96000000000475" text-anchor="middle">6.4</text><rect x="401" y="245.38249999999266" width="38" height="109.61750000000734" fill="#108371"/>
+        <text x="420" y="238.38249999999266" text-anchor="middle">16.3</text><text x="397" y="378" text-anchor="middle">300 въпроса</text><rect x="563.6666666666666" y="240.67500000002752" width="38" height="114.32499999997248" fill="#2859ce"/>
+        <text x="582.6666666666666" y="233.67500000002752" text-anchor="middle">17</text><rect x="609.6666666666666" y="133.74749999991835" width="38" height="221.25250000008165" fill="#108371"/>
+        <text x="628.6666666666666" y="126.74749999991835" text-anchor="middle">32.9</text><text x="605.6666666666666" y="378" text-anchor="middle">1000 въпроса</text>
+      <rect x="175" y="406" width="12" height="12" fill="#2859ce"/>
+      <text x="194" y="417">Случаен подбор</text><rect x="398" y="406" width="12" height="12" fill="#108371"/>
+      <text x="417" y="417">Балансиран подбор</text>
+    </g></svg>

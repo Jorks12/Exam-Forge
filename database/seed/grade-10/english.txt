@@ -1,0 +1,61 @@
+@tenses|Времена и последователност
+01|1|Choose the completion: By the time I arrived, the film ___.|had started|starts|has started|is starting|The past perfect places the start of the film before another past event, the speaker's arrival.
+02|2|Which sentence describes a habit in the past that has changed?|We used to cycle to school.|We are used to cycling to school.|We have just cycled to school.|We will be cycling to school.|“Used to” followed by the base verb describes a former habit. “Be used to” means being accustomed to something.
+@conditionals|Условни изречения
+01|2|Choose the completion for advice about the present: If I were you, I ___ the receipt.|would keep|will keep|had kept|would have kept|The second conditional uses a past form in the if-clause and would with the base verb to express hypothetical present advice.
+02|3|Which sentence expresses a past decision with a consequence now?|If we had booked earlier, we would have seats now.|If we book earlier, we will have seats tomorrow.|If we booked earlier, we would have seats tomorrow.|If we had booked earlier, we would have had seats yesterday.|The past perfect identifies a past condition, while “would have seats now” describes its hypothetical present consequence.
+@reading|Четене с разбиране
+01|1|Read: “The museum opens at noon on Sundays, two hours later than on weekdays.” When does it open on a weekday?|At 10 a.m.|At noon|At 2 p.m.|At 8 a.m.|Noon is 12 p.m. The weekday opening time is two hours earlier.
+02|2|Read: “Mila packed a spare charger, although she doubted anyone would need it.” What does “although” introduce?|A contrast with her reason for packing it|The exact time of packing|A result of using the charger|A list of other objects|The clause expresses a concession: she packed it despite expecting it to be unnecessary.
+@word-formation|Словообразуване и лексика
+01|1|Which word means “able to be repaired”?|Repairable|Repaired|Repairing|Repairer|The suffix “-able” expresses that something can undergo the action named by the verb.
+02|2|Choose the most natural collocation: The committee will ___ a decision tomorrow.|make|do|take up|perform|English uses the fixed combination “make a decision” to mean decide something.
+@communication|Комуникативни ситуации
+01|2|Which request is appropriate in a polite email to a person you have not met?|Could you please confirm the appointment?|Confirm the appointment right now.|Hey, you're coming, yeah?|You should've confirmed already.|“Could you please” makes a clear, courteous request without assuming familiarity.
+02|3|Which reply acknowledges a delay while leaving the date of delivery uncertain?|We expect delivery on Friday, although the carrier has yet to confirm it.|The carrier confirmed delivery for Friday.|The shipment was delivered last Friday.|Delivery is guaranteed by Friday.|“Expect” gives a provisional date and the concession explicitly notes that it is awaiting confirmation.
+
+@time-markers|Time expressions and verb forms
+p01|1|Complete: “I have lived here ___ 2021.”|since|for|during|by|Use since before a starting point in time.
+p02|1|Complete: “She has worked at the library ___ three years.”|for|since|until|at|Use for with a duration.
+p03|1|Which time expression fits “We met at the station ___” in a completed past account?|yesterday|next Tuesday|tomorrow|soon|Yesterday names a finished past period.
+p04|2|Complete: “When the bus finally arrived, the last passenger ___.”|had already left|has already left|is already leaving|will have left|Past perfect marks the earlier of two past events.
+p05|2|Choose the form for an activity taking place at this very moment: “Leo ___ his bike.”|is repairing|has repaired|had repaired|will repair|Present continuous describes an action in progress.
+p06|2|Choose the form for experience up to now: “I ___ Iceland.”|have never visited|never visit yesterday|had never visited before that trip|will never visit tomorrow|Present perfect connects experience to the present.
+p07|3|Complete: “On Monday she said she ___ outside the station at six the next day.”|would be waiting|will have waited|has been waiting|is waited|Future continuous backshifts to would be plus the participle.
+p08|3|Complete: “By the time the visitors arrive tomorrow, the team ___ the safety checks.”|will have completed|would complete last week|had completed yesterday|has been completed|Future perfect describes completion before a future point.
+@grammar-functions|Grammar in use
+p01|1|Complete: “The guide ___ helped us was very patient.”|who|where|when|whose|Who refers to a person and functions as subject.
+p02|1|Choose the standard question: “How ___ luggage may I take?”|much|many|a few|several|Luggage is uncountable in this meaning.
+p03|1|Which word completes “___ of the two doors are locked” if neither can be opened?|both|Neither|Either|None|Both includes the two members of a pair.
+p04|2|How can a speaker express regret about failing to check the date yesterday?|should have checked|must check tomorrow|has to check now|might check next week|Should have plus a past participle evaluates a past action.
+p05|2|Complete the passive: “The notice ___ by the secretary last Friday.”|was written|wrote|has written|is writing|Past passive uses was with the past participle.
+p06|2|Complete: “The teacher reminded us ___ our notebooks.”|to bring|bring|to bringing|brought|Remind takes a person followed by a to-infinitive.
+p07|3|Which word means “except if” in “You cannot enter ___ you show a ticket”?|unless|although|because|while|Unless introduces the exception to the restriction.
+p08|3|Complete the unreal past condition: “If she ___ earlier, we could have met her.”|had called|calls|will call|would call|A past perfect if-clause marks a condition that did not happen.
+@word-parts|Word formation in context
+p01|1|Which adjective means “not giving enough attention”?|careless|unfair|rewrite|movement|The suffix -less marks absence of care.
+p02|1|Which adjective describes a decision that treats similar cases differently without reason?|unfair|disagreement|reusable|misleading|The prefix un- reverses the meaning of fair.
+p03|1|Which verb means “write again”?|rewrite|unavoidable|careless|unfair|The prefix re- means again in this context.
+p04|2|Which noun names the act of moving?|movement|rewrite|disagreement|reusable|The suffix -ment forms an action noun.
+p05|2|Which noun describes a situation in which people hold different opinions?|disagreement|misleading|unavoidable|careless|The prefix dis- signals opposition or absence of agreement.
+p06|2|Which adjective describes a bottle designed to be used again?|reusable|unfair|rewrite|movement|Re- means again and -able expresses possibility.
+p07|3|Which adjective describes wording that makes readers form a false impression?|misleading|disagreement|reusable|unavoidable|The prefix mis- marks a wrong or deceptive direction.
+p08|3|Which adjective means that an event cannot be prevented?|unavoidable|careless|unfair|rewrite|Un- negates the possibility expressed by avoidable.
+@functional-phrases|Everyday functional English
+p01|1|Which sentence asks for permission to leave?|May I leave early?|I might leave early.|I left early.|You should leave early.|May I is a conventional permission request.
+p02|1|Which response politely declines a request?|I'm afraid I can't.|I would be happy to.|That works for me.|Of course I can.|The phrase introduces a refusal gently.
+p03|1|Which question asks about the duration of a journey?|How long does it take?|How far is it?|How often does it run?|How much does it cost?|How long asks for a length of time.
+p04|2|Which request asks a speaker to repeat the same words?|Could you say that again?|Could you speak more slowly?|Could you write your name?|Could you change the subject?|The verb again asks for repetition.
+p05|2|Which reply says you failed to hear the end of a message?|I didn't catch the last part.|I agreed with the last part.|I wrote the last part.|I can predict the last part.|Catch means hear or understand in this context.
+p06|2|Which sentence expresses pleasure about a future event?|I'm looking forward to it.|I'm putting it off.|I'm turning it down.|I'm getting over it.|Look forward to means anticipate with pleasure.
+p07|3|Which request correctly uses a verb after “Would you mind”?|Would you mind closing the window?|Would you mind to close the window?|Would you mind closed the window?|Would you mind close the window?|Mind is followed by an -ing form in this construction.
+p08|3|Which sentence tells a guest there is no obligation to bring something?|You needn't bring anything.|You mustn't bring anything.|You must bring something.|You might bring something.|Needn't expresses absence of necessity.
+@reading-decisions|Reading and interpreting messages
+p01|1|Read: “The ground-floor lab is closed. Today's session takes place upstairs in Room 204 on the second floor.” Where should students go?|On the second floor|On the ground floor|In the closed lab|Outside the building|The announcement directly identifies the replacement floor.
+p02|1|Read: “The shuttle runs Monday to Friday. A separate bus serves the village at weekends.” When does the shuttle run?|Only on weekdays|Only on weekends|Every day|Only on Fridays|Monday through Friday excludes the weekend service.
+p03|1|Read: “The online form is complete. Please print it and bring it to the desk.” What should the applicant do next?|Bring a printed copy|Complete another online form|Send a blank envelope|Call the desk|The message requires bringing the printed form.
+p04|2|Read: “Cancel at least 24 hours before the tour to avoid a fee.” What does this rule offer?|No fee if cancelled in time|All cancellations cost money|Only late cancellations are free|No cancellations are possible|A sufficiently early cancellation is free.
+p05|2|Read: “The hall has no seats left. Visitors may watch the event from the café screen instead.” What is the café's role?|The café is an alternative|It provides more seats in the hall|It cancels the event|It sells the only tickets|It provides a different place to view the same event.
+p06|2|Read: “We accept returns within 14 days provided that the item has not been used.” What condition applies besides the deadline?|Only unused items|The packaging must be blue|The item must be used once|The return must be online|Provided that introduces the unused-item condition.
+p07|3|Read: “The organisers printed 200 leaflets. They ran out before the first session, although they expected the supply to last all day.” What can we infer?|Demand exceeded expectations|No visitors attended|The leaflets were never distributed|The session lasted all day|The supply was used faster than organisers predicted.
+p08|3|Read: “The classroom lights are on, so someone may still be there.” How certain is the conclusion?|An assumption, not a certainty|A certainty based on a count|A statement about tomorrow|A direct request to enter|May presents a possibility rather than confirmed presence.

@@ -1,0 +1,18 @@
+{
+  "name": "examforge",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "npm run lint --workspaces",
+    "test": "npm test -w backend",
+    "benchmark": "node research/benchmarks/run.mjs"
+  }
+}

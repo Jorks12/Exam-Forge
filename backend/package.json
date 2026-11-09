@@ -1,0 +1,37 @@
+{
+  "name": "@examforge/backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env --watch src/server.ts",
+    "start": "node --env-file-if-exists=.env dist/server.js",
+    "build": "tsc",
+    "typecheck": "tsc -p tsconfig.check.json",
+    "lint": "eslint src scripts tests",
+    "test": "vitest run",
+    "seed": "node --env-file-if-exists=.env scripts/seed.ts",
+    "seed:catalogue": "node --env-file-if-exists=.env scripts/seed-catalogue.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.119.0",
+    "cors": "^2",
+    "express": "^5",
+    "express-rate-limit": "^8",
+    "helmet": "^8",
+    "pg": "^8",
+    "zod": "^4"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5",
+    "@types/cors": "^2",
+    "@types/express": "^5",
+    "@types/node": "^24",
+    "@types/pg": "^8",
+    "@types/supertest": "^6",
+    "eslint": "^9",
+    "supertest": "^7",
+    "typescript": "^5.9",
+    "typescript-eslint": "^8",
+    "vitest": "^4"
+  }
+}

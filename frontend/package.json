@@ -1,0 +1,33 @@
+{
+  "name": "@examforge/frontend",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "start": "next start",
+    "start:local": "next build --webpack && next start --hostname localhost",
+    "build": "next build --webpack",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint .",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.0",
+    "lucide-react": "latest",
+    "next": "^16",
+    "react": "^19",
+    "react-dom": "^19",
+    "recharts": "^3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "^16",
+    "tailwindcss": "^4",
+    "typescript": "^5.9"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "metadata": {
+    "node": "v24.21.0",
+    "platform": "win32",
+    "release": "10.0.26300",
+    "architecture": "x64",
+    "cpu": "Intel(R) Core(TM) Ultra 9 386H",
+    "repetitions": 1000,
+    "warmup": 200,
+    "count": 20,
+    "time_unit": "microseconds",
+    "distribution_target": [
+      5,
+      5,
+      5,
+      5
+    ]
+  },
+  "timing": [
+    {
+      "size": 120,
+      "algorithm": "random",
+      "mean": 3.1697000000000655,
+      "median": 2.500000000011937,
+      "p95": 3.6000000000058208,
+      "standard_deviation": 7.128730034866014,
+      "maximum": 133.89999999999702
+    },
+    {
+      "size": 120,
+      "algorithm": "balanced",
+      "mean": 17.31380000000044,
+      "median": 10.99999999999568,
+      "p95": 35.49999999999898,
+      "standard_deviation": 27.44931419106868,
+      "maximum": 481.70000000000357
+    },
+    {
+      "size": 300,
+      "algorithm": "random",
+      "mean": 7.970600000000216,
+      "median": 6.399999999999295,
+      "p95": 8.700000000004593,
+      "standard_deviation": 16.33852121949868,
+      "maximum": 353.10000000001196
+    },
+    {
+      "size": 300,
+      "algorithm": "balanced",
+      "mean": 20.471100000000334,
+      "median": 16.30000000000109,
+      "p95": 28.999999999996362,
+      "standard_deviation": 21.953986307502642,
+      "maximum": 405.2000000000078
+    },
+    {
+      "size": 1000,
+      "algorithm": "random",
+      "mean": 19.155499999999815,
+      "median": 16.999999999995907,
+      "p95": 30.400000000014415,
+      "standard_deviation": 8.911169942829979,
+      "maximum": 87.00000000001751
+    },
+    {
+      "size": 1000,
+      "algorithm": "balanced",
+      "mean": 40.57029999999997,
+      "median": 32.90000000001214,
+      "p95": 87.89999999999054,
+      "standard_deviation": 29.504760089009146,
+      "maximum": 420.29999999999745
+    }
+  ],
+  "distribution": [
+    {
+      "algorithm": "random",
+      "mean": 9.804,
+      "median": 10,
+      "p95": 14,
+      "standard_deviation": 3.024166662074046,
+      "maximum": 20,
+      "means_by_topic": [
+        8.368,
+        5.824,
+        4.154,
+        1.654
+      ]
+    },
+    {
+      "algorithm": "balanced",
+      "mean": 0,
+      "median": 0,
+      "p95": 0,
+      "standard_deviation": 0,
+      "maximum": 0,
+      "means_by_topic": [
+        5,
+        5,
+        5,
+        5
+      ]
+    }
+  ]
+}

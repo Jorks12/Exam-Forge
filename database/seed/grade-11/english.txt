@@ -1,0 +1,61 @@
+@register|Регистър и формална комуникация
+01|1|Which closing fits a formal email that begins “Dear Ms Carter”?|Yours sincerely,|See ya,|Hey there,|What's up,|In British-style correspondence, “Yours sincerely” is a conventional closing when the recipient is named.
+02|2|Which phrase states a disagreement while acknowledging the other person's point?|I see your point, but the figures suggest a different conclusion.|You obviously haven't looked at anything.|I agree with every word you said.|Your view needs no further discussion.|The opening acknowledges the position and “but” introduces the evidence-based disagreement.
+@inference|Изводи от текст
+01|1|Read: “The timetable listed no evening bus, so Nina borrowed a bicycle.” Why did she borrow it?|There was no evening bus on the timetable.|She needed to deliver the timetable.|The bicycle was part of the bus service.|She wanted to avoid returning it.|The connective “so” marks borrowing the bicycle as a consequence of the missing service.
+02|3|Read: “The pilot programme was promising, but the sample was too small for firm conclusions.” Which summary preserves the author's caution?|Early results were positive, but more evidence is needed.|The programme was proved effective for everyone.|The results were wholly negative.|The author rejects the use of future trials.|“Promising” signals a positive indication, while the sample limitation prevents a strong conclusion.
+@reporting|Непряка реч и модалност
+01|1|Which modal expresses past ability in “At six, Ana ___ already read short stories”?|could|must|should|may|“Could” is the usual modal for general ability at a time in the past.
+02|2|Choose the reported question: “Where did you leave the keys?” she asked me.|She asked me where I had left the keys.|She asked me where had I left the keys.|She asked me where did I left the keys.|She asked me where I did leave the keys?|A reported wh-question uses statement order, with a subject before the verb, and can backshift past simple to past perfect.
+@cohesion|Свързаност и прецизност
+01|2|Which connector introduces an unexpected contrast: “The route was longer than expected. ___, we arrived on time.”?|Nevertheless|Therefore|For example|Consequently|“Nevertheless” signals that arriving on time contrasts with what the longer route might lead readers to expect.
+02|3|Which revision removes the ambiguity in “When Maya called Emma, she was already at the station” if Emma was at the station?|When Maya called Emma, Emma was already at the station.|When Maya called Emma, she was already there.|When she called her, Emma was there.|When Emma called Maya, Maya was already at the station.|Repeating Emma's name identifies the person at the station and preserves Maya as the caller.
+@lexis|Лексика в контекст
+01|2|Which word best completes “The results were ___; another trial is needed before deciding”?|inconclusive|inevitable|irreplaceable|unrelated|“Inconclusive” means the available results do not support a definite decision.
+02|2|What does “address the issue” mean in a report about transport delays?|Deal with the problem|Send the report to an address|Rename the station|Prove that the issue never existed|As a verb in this collocation, “address” means take steps to examine or handle a problem.
+
+@stance-and-argument|Stance and argument
+p01|1|Which verb means “state that something is true”, without itself proving it?|claim|evidence|counterargument|concede|A claim can still require evidence.
+p02|1|Which noun names the information used to support a conclusion?|evidence|qualify|corroborate|refute|Evidence provides grounds for evaluating a claim.
+p03|1|Which noun names a reason offered against a proposed conclusion?|counterargument|substantiate|claim|evidence|It challenges the argument from another position.
+p04|2|Which verb means accept a point made by an opponent, without accepting the entire case?|concede|counterargument|qualify|corroborate|Conceding one point can leave the main disagreement open.
+p05|2|Which verb means restrict the scope or certainty of a statement?|qualify|refute|substantiate|claim|A qualifier limits how far the statement applies.
+p06|2|Which verb means support a report using additional independent evidence?|corroborate|evidence|counterargument|concede|The additional source strengthens the original account.
+p07|3|Which verb means show an assertion to be false using evidence or reasoning?|refute|qualify|corroborate|substantiate|Refutation requires more than expressing disagreement.
+p08|3|Which verb means provide evidence sufficient to back up an assertion?|substantiate|claim|evidence|counterargument|Supporting facts give the assertion a firmer basis.
+@complex-grammar|Complex grammar and precision
+p01|1|Which word introduces contrast in “___ it was late, the group stayed to finish”?|although|because|before|so that|Although introduces a concessive subordinate clause.
+p02|1|Complete: “The author ___ book won the prize gave a short talk.”|whose|whom|where|which|Whose marks possession in a relative clause.
+p03|1|Choose the form that emphasizes an ongoing activity from 9 a.m. up to now: “I ___ since nine.”|have been studying|had studied yesterday|was studied at nine|will study tomorrow|Present perfect continuous stresses the duration of the activity.
+p04|2|Complete the paired comparison: “The earlier we leave, ___.”|the sooner we arrive|we arrive the soon|soon we arrived|sooner do we arrive|The second comparative clause mirrors the first.
+p05|2|Which sentence correctly uses inversion after fronted “not until”?|Not until midnight did the noise stop.|Not until midnight the noise did stop.|Not until midnight did stop the noise.|Not until midnight the noise stopped.|The auxiliary comes before the subject after the negative expression.
+p06|2|Complete: “The suspect ___ the city before the incident.” Choose a passive reporting form.|is believed to have left|is believing to leave|believes to have left|is believed have left|The perfect infinitive locates the reported departure earlier.
+p07|3|Which phrase can replace “If I had known” in a formal conditional?|Had I known|Would I know|If would I know|Have I known|Inversion with had can replace if in a past unreal condition.
+p08|3|Complete: “The documents are currently ___ by the clerk.”|being checked|having checked|been checking|check|The continuous passive uses being plus a past participle.
+@cohesion-advanced|Cohesion and relationships
+p01|1|Which connector adds a second supporting point?|In addition|In contrast|For instance|As a result|It signals that another relevant point follows.
+p02|1|Which connector explicitly introduces a difference between cases?|In contrast|In other words|Meanwhile|By the same token|It directs attention to a contrast with the previous statement.
+p03|1|Which connector introduces a specific example of a general point?|For instance|On the contrary|In addition|In contrast|It moves from a broader claim to an illustration.
+p04|2|Which connector introduces an effect of the preceding event?|As a result|For instance|In other words|Meanwhile|The second statement is presented as a consequence.
+p05|2|Which connector restates an idea in a clearer way?|In other words|By the same token|On the contrary|In addition|What follows rephrases the previous point.
+p06|2|Which connector shifts to an event happening at the same time?|Meanwhile|In contrast|For instance|As a result|It signals simultaneity rather than cause.
+p07|3|Which connector extends an argument by applying similar reasoning to another case?|By the same token|In other words|Meanwhile|On the contrary|The next claim follows an analogous principle.
+p08|3|Which connector corrects a preceding claim by asserting its opposite?|On the contrary|In addition|In contrast|For instance|It marks direct contradiction rather than a mere difference.
+@professional-style|Register and editing
+p01|1|Which sentence is suitable for sending a report in a formal email?|Please find the report attached.|Hey, here's that thing.|Send me the report right now.|The report might exist somewhere.|It tells the reader where to find the file.
+p02|1|Which sentence politely asks to change the time of a meeting?|Could we reschedule the meeting?|The meeting is now cancelled.|I will attend the meeting.|Who chaired the meeting yesterday?|Reschedule means arrange it for another time.
+p03|1|Which response acknowledges a reported issue professionally?|Thank you for bringing this to our attention.|That is obviously your fault.|We won't listen.|Forget about it.|The speaker recognizes the report and the sender's effort.
+p04|2|Which sentence replaces “Lots of people answered” with precise wording?|The survey received 46 responses.|Everyone must have answered.|The survey was pretty successful.|People usually like surveys.|It states a count that can be checked.
+p05|2|Which version removes the redundancy in “The reason was because the power failed”?|Due to a power outage, the library closed early.|The reason was due because of power.|The library closed when it closed.|Power failed due to a failure.|It states the cause once and preserves the event.
+p06|2|Which sentence states the action in active voice?|The team submitted the application.|The application was submitted by the team.|The application was being submitted.|The application is to be submitted.|The grammatical subject performs the action.
+p07|3|Which statement communicates uncertainty without promising a change?|We may need to revise the estimate.|We will definitely revise the estimate.|The estimate was already revised.|We refuse to revise any estimate.|May leaves open whether revision is necessary.
+p08|3|Which revision avoids comparing a number with a group of people?|Compare the average scores of the two groups.|Compare the first group's score with the second group.|Compare both groups with a number.|Compare the score with the participants.|Scores are compared with scores.
+@advanced-reading|Inference and critical reading
+p01|1|Read: “The school will extend the trial until the end of next month. A final decision will follow.” Which plan is announced?|The pilot will continue until the end of next month.|The trial ends today.|The project is permanently adopted.|The project has already been rejected.|The text announces an extension rather than a permanent adoption.
+p02|1|Read: “During repairs, access is via the courtyard rather than the main doors.” How should visitors enter?|From a different entrance|Through the main doors|From the roof|Through the basement window|Rather than contrasts the replacement entrance with the usual one.
+p03|1|Read: “The workshop is optional for all staff.” What does the notice mean?|Participants can choose to join.|Attendance is compulsory.|Only managers may join.|No one may join.|Optional means attendance is a choice.
+p04|2|Read: “Scores rose after the change, but the participants also had extra practice.” What limitation is identified?|The improvement may have another cause.|The scores fell.|Practice was prohibited.|The change occurred after the scores rose.|Extra practice is an alternative explanation for the gain.
+p05|2|Read: “Responses came mainly from frequent visitors.” Which caution follows?|A sample may not represent everyone.|The survey was certainly random.|Every visitor responded.|The total could not be counted.|Frequent visitors may differ from infrequent ones.
+p06|2|Read: “The cheaper route took twice as long, so the time saved mattered more than the fare.” What distinction matters?|The author distinguishes price from value.|The cheapest route was the fastest.|The fare was the only criterion.|Both routes cost the same.|The writer evaluates overall benefit alongside price.
+p07|3|Read: “The method worked in two small trials under ideal conditions.” Which conclusion is justified?|The evidence supports a limited conclusion.|The method works everywhere.|The method failed in every trial.|Conditions never affect the result.|The reported success applies to the tested conditions.
+p08|3|Read: “One report counts all trips; the other counts unique passengers.” What problem arises if we compare their totals?|The figures are not directly comparable.|Both reports count exactly the same event.|One report has no numbers.|Trips cannot be recorded.|The reports measure different units.
