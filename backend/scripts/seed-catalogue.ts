@@ -8,7 +8,8 @@ if (args.has('--migrate-only')) {
   if (!databaseUrl) throw new Error('Липсва DATABASE_URL.');
   const { database, close } = postgres(databaseUrl);
   try {
-    for (const file of ['002_catalogue.sql', '003_grade_12.sql']) {
+    for (const file of ['002_catalogue.sql', '003_grade_12.sql', '004_review_cards.sql', '005_similar_questions.sql',
+      '006_shared_question_bank.sql']) {
       await database.query(await readFile(new URL('../../database/migrations/' + file, import.meta.url), 'utf8'));
       console.log('Приложена миграция', file);
     }

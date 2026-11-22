@@ -1,6 +1,10 @@
 import { z } from 'zod';
 
 export const id = z.uuid();
+export const reviewInput = z.strictObject({
+  rating: z.enum(['again', 'hard', 'good', 'easy']),
+  revision: z.int().min(0).max(2_147_483_646),
+});
 export const labels = ['A', 'B', 'C', 'D'] as const;
 const difficulty = z.union([z.literal(1), z.literal(2), z.literal(3)]);
 const text = (limit: number) => z.string().trim().min(1).max(limit);
@@ -23,6 +27,7 @@ export const questionInput = z.strictObject({
   isActive: z.boolean().optional(),
 });
 export const questionPatch = update(questionInput);
+export const similarQuestionInput = z.strictObject({ content: z.string().trim().min(12).max(4000), excludeId: id.optional() });
 const integer = (min: number, max: number) => z.coerce.number().int().min(min).max(max);
 export const pagination = z.strictObject({ page: integer(1, 100000).default(1), limit: integer(1, 100).default(20) });
 const uniqueTopics = z.array(id).min(1).max(30).refine(ids => new Set(ids).size === ids.length);
@@ -38,12 +43,14 @@ const questionScope = {
   search: z.string().trim().max(120).optional(),
 };
 export const countFilters = z.strictObject(questionScope).refine(paired, 'Изберете клас и предмет.');
+export const catalogueStatusInput = z.strictObject({ isActive: z.boolean() });
 export const questionFilters = pagination.extend({
   ...questionScope,
   active: z.enum(['true', 'false']).optional(),
 }).refine(paired, 'Изберете клас и предмет.');
 export const generateInput = z.strictObject({
   ...scope,
+  shared: z.literal(true).optional(),
   title: text(120),
   topicIds: uniqueTopics.optional(),
   difficulty: difficulty.optional(),
@@ -51,7 +58,8 @@ export const generateInput = z.strictObject({
   algorithm: z.enum(['random', 'balanced']),
   timeLimitMinutes: z.number().int().min(1).max(180),
 }).refine(paired, 'Изберете клас и предмет.')
-  .refine(value => value.grade !== undefined || value.topicIds, 'Изберете поне една лична тема.');
+  .refine(value => value.grade !== undefined || value.topicIds, 'Изберете поне една тема.')
+  .refine(value => !value.shared || value.grade === undefined, 'Изберете един източник на въпроси.');
 export const analyticsFilters = z.strictObject({
   ...scope, from: z.iso.date().optional(), to: z.iso.date().optional(),
 }).refine(value => !value.from || !value.to || value.from <= value.to, 'Невалиден период.');

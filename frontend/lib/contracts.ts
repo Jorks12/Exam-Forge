@@ -55,7 +55,13 @@ export interface Overview {
 }
 export interface TopicPerformance { topic_id: string; name: string; total: number; correct: number; percentage: number }
 export interface SubjectPerformance { id: string; name: string; total: number; average: number }
-export interface ScorePoint { id: string; title: string; submitted_at: string; percentage: number }
+export interface ScorePoint { id: string; title: string; submitted_at: string; percentage: number; rolling_average: number }
+export interface AnalyticsSummary {
+  overview: Overview;
+  topics: TopicPerformance[];
+  progress: ScorePoint[];
+  subjects: SubjectPerformance[];
+}
 export const percent = (value: number) => new Intl.NumberFormat('bg-BG', { maximumFractionDigits: 2 }).format(value) + '%';
 export const date = (value: string) => new Intl.DateTimeFormat('bg-BG', { dateStyle: 'medium' }).format(new Date(value));
 export const attemptSubject = (attempt: Attempt) =>

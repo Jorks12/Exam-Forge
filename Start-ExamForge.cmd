@@ -7,7 +7,6 @@ if errorlevel 1 start "ExamForge Backend" "%ComSpec%" /k "npm.cmd run dev -w bac
 
 call :ready http://localhost:3000/login
 if errorlevel 1 (
-  set "EXAMFORGE_LOCAL_RUN=1"
   start "ExamForge Frontend" "%ComSpec%" /k "npm.cmd run start:local -w frontend"
 )
 

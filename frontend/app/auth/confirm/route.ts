@@ -9,9 +9,10 @@ export async function GET(request: NextRequest) {
   const type = request.nextUrl.searchParams.get('type');
   const result = code ? await client?.auth.exchangeCodeForSession(code)
     : token_hash && (type === 'email' || type === 'signup') ? await client?.auth.verifyOtp({ token_hash, type }) : undefined;
-  if (result?.data.session) savePolicy();
+  const confirmed = Boolean(result?.data.session && result.data.user?.email_confirmed_at && !result.error);
+  if (confirmed) savePolicy();
   const login = new URL('/login', requestOrigin(request));
-  login.searchParams.set('confirmation', result && !result.error ? 'success' : 'failed');
+  login.searchParams.set('confirmation', confirmed ? 'success' : 'failed');
   const response = NextResponse.redirect(login);
   response.headers.set('Cache-Control', privateHeaders['Cache-Control']);
   response.headers.set('Referrer-Policy', 'no-referrer');

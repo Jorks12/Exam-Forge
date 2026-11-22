@@ -2,6 +2,16 @@ import type { Database, Sql } from './database.ts';
 import type { Candidate } from '../algorithms/randomSelection.ts';
 import type { Filters, QuestionInput, QuestionPatch, labels } from '../validators/schemas.ts';
 import { found } from '../utils/errors.ts';
+import { questionSearchScore } from './question-search.ts';
+import { catalogueAdminEmail } from '../middleware/auth.ts';
+
+export async function sharedBankOwner(sql: Sql) {
+  const { rows } = await sql.query<{ id: string }>(`
+    SELECT id FROM auth.users
+    WHERE lower(email) = $1 AND email_confirmed_at IS NOT NULL
+    LIMIT 2`, [catalogueAdminEmail]);
+  return rows.length === 1 ? rows[0].id : null;
+}
 
 export interface Option {
   id: string;
@@ -39,12 +49,17 @@ export function bankRepository(db: Database) {
   }
 
   return {
-    async topics(userId: string) {
+    async topics(userId: string | null, activeOnly = false) {
       return (await db.query(`
         SELECT t.id, t.name, t.description, t.subject_grade_id, count(q.id)::int AS question_count,
-          count(q.id) FILTER (WHERE q.is_active)::int AS active_count
-        FROM examforge.topics t LEFT JOIN examforge.questions q ON q.topic_id = t.id
-        WHERE t.owner_id = $1 GROUP BY t.id ORDER BY t.name, t.id`, [userId])).rows;
+          count(q.id) FILTER (WHERE q.is_active)::int AS active_count,
+          count(q.id) FILTER (WHERE q.is_active AND q.difficulty = 1)::int AS easy,
+          count(q.id) FILTER (WHERE q.is_active AND q.difficulty = 2)::int AS medium,
+          count(q.id) FILTER (WHERE q.is_active AND q.difficulty = 3)::int AS hard
+        FROM examforge.topics t LEFT JOIN examforge.questions q ON q.topic_id = t.id AND (NOT $2::boolean OR q.is_active)
+        WHERE t.owner_id = $1 GROUP BY t.id
+        HAVING NOT $2::boolean OR count(q.id) > 0
+        ORDER BY t.name, t.id`, [userId, activeOnly])).rows;
     },
     async createTopic(userId: string, input: TopicInput) {
       return (await db.query(`
@@ -64,21 +79,34 @@ export function bankRepository(db: Database) {
     async deleteTopic(userId: string, id: string) {
       found((await db.query('DELETE FROM examforge.topics WHERE owner_id = $1 AND id = $2 RETURNING id', [userId, id])).rows[0]);
     },
-    async listQuestions(userId: string, filters: Filters) {
+    async listQuestions(userId: string | null, filters: Filters, includeAnswers = true) {
+      const score = questionSearchScore('$5', 'q.content', Boolean(filters.search));
       const where = ` WHERE q.owner_id = $1 AND ($2::uuid IS NULL OR q.topic_id = $2)
         AND ($3::int IS NULL OR q.difficulty = $3)
         AND ($4::boolean IS NULL OR q.is_active = $4)
-        AND ($5::text IS NULL OR strpos(lower(q.content), lower($5)) > 0)`;
+        AND ${score} >= 0.5`;
       const values = [userId, filters.topicId ?? null, filters.difficulty ?? null, filters.active ?? null, filters.search || null];
       const { rows } = await db.query<{ total: number; items: Question[] }>(`
         SELECT (SELECT count(*)::int FROM examforge.questions q ${where}) AS total,
-          (SELECT coalesce(jsonb_agg(record), '[]'::jsonb) FROM (${questionView}${where}
-            ORDER BY q.created_at DESC, q.id LIMIT $6 OFFSET $7) record) AS items`,
+          (SELECT coalesce(jsonb_agg(${includeAnswers ? 'to_jsonb(record)' : "to_jsonb(record) - 'correct_option_id' - 'explanation'"}), '[]'::jsonb) FROM (${questionView}${where}
+            ORDER BY ${score} DESC, q.created_at DESC, q.id LIMIT $6 OFFSET $7) record) AS items`,
       [...values, filters.limit, (filters.page - 1) * filters.limit]);
       return { ...rows[0], page: filters.page, limit: filters.limit };
     },
     getQuestion,
+    async similarQuestions(userId: string, content: string, excludeId?: string) {
+      return (await db.query(`
+        WITH candidates AS MATERIALIZED (
+          SELECT q.id, q.content, t.name AS topic_name, q.is_active,
+            examforge.question_similarity($2, q.content) AS similarity
+          FROM examforge.questions q JOIN examforge.topics t ON t.id = q.topic_id
+          WHERE q.owner_id = $1 AND ($3::uuid IS NULL OR q.id <> $3)
+        )
+        SELECT * FROM candidates WHERE similarity >= 0.72
+        ORDER BY similarity DESC, id LIMIT 3`, [userId, content, excludeId ?? null])).rows;
+    },
     async counts(userId: string, filters: { topicId?: string; difficulty?: number; search?: string }) {
+      const score = questionSearchScore('$4', 'content', Boolean(filters.search));
       return (await db.query(`
         SELECT count(*)::int AS active_count,
           count(*) FILTER (WHERE difficulty = 1)::int AS easy,
@@ -86,7 +114,7 @@ export function bankRepository(db: Database) {
           count(*) FILTER (WHERE difficulty = 3)::int AS hard
         FROM examforge.questions WHERE owner_id = $1 AND is_active
           AND ($2::uuid IS NULL OR topic_id = $2) AND ($3::smallint IS NULL OR difficulty = $3)
-          AND ($4::text IS NULL OR strpos(lower(content), lower($4)) > 0)`,
+          AND ${score} >= 0.5`,
       [userId, filters.topicId ?? null, filters.difficulty ?? null, filters.search || null])).rows[0];
     },
     async saveQuestion(userId: string, input: QuestionInput | QuestionPatch, id?: string) {

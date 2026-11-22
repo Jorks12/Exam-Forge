@@ -2,9 +2,9 @@
 
 import Link, { useLinkStatus } from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { MouseEvent, ReactNode } from 'react';
-import { BarChart3, BookOpen, ClipboardPlus, History, LayoutDashboard, LoaderCircle, LogOut, Menu, Settings, X } from 'lucide-react';
+import { BarChart3, BookOpen, ChevronDown, ClipboardPlus, History, LayoutDashboard, LoaderCircle, LogOut, Menu, RotateCcw, Settings, ShieldCheck, X } from 'lucide-react';
 import { request, write } from '@/lib/api';
 import type { Account } from '@/lib/auth-routes';
 import { Brand } from './brand';
@@ -16,6 +16,7 @@ const links = [
   ['/questions', 'Банка с въпроси', BookOpen],
   ['/exams/new', 'Нов изпит', ClipboardPlus],
   ['/history', 'История', History],
+  ['/review', 'Преговор', RotateCcw],
   ['/analytics', 'Анализи', BarChart3],
   ['/settings', 'Настройки', Settings],
 ] as const;
@@ -38,17 +39,22 @@ export function Workspace({ children, account }: { children: ReactNode; account:
   const [documentTarget, setDocumentTarget] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const menu = menuPath === pathname;
+  const drawer = useRef<HTMLDialogElement>(null);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const profileButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
-    if (!menu) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
-      setMenuPath(null);
-      document.querySelector<HTMLButtonElement>('.mobile-menu')?.focus();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+    const element = drawer.current;
+    if (menu && element && !element.open) element.showModal();
+    if (!menu && element?.open) element.close();
   }, [menu]);
+  useEffect(() => {
+    const desktop = matchMedia('(min-width: 901px)');
+    const close = () => { if (desktop.matches) setMenuPath(null); };
+    desktop.addEventListener('change', close);
+    return () => desktop.removeEventListener('change', close);
+  }, []);
   useEffect(() => {
     if (process.env.NODE_ENV !== 'development') return;
     const clear = () => { setDocumentTarget(null); setMenuPath(null); };
@@ -67,12 +73,12 @@ export function Workspace({ children, account }: { children: ReactNode; account:
   }
 
   const active = links.find(([href]) => pathname === href || pathname.startsWith(href + '/'));
-  const title = active?.[1] ?? (pathname.startsWith('/results') ? 'Резултат' : 'Изпит');
+  const title = pathname === '/questions/topics' ? 'Теми' : pathname === '/questions/quality' ? 'Качество на въпросите'
+    : pathname === '/review' ? 'Преговор' : active?.[1] ?? (pathname.startsWith('/results') ? 'Резултат' : 'Изпит');
   const email = account.email ?? 'Профил';
+  const avatar = <span className="avatar" aria-hidden="true">{email.slice(0, 1).toUpperCase()}</span>;
 
-  return <div className="shell">
-    <a className="skip-link" href="#main">Към съдържанието</a>
-    <aside className={'sidebar' + (menu ? ' open' : '')} id="navigation">
+  const navigation = <>
       <Link href="/dashboard" className="side-brand" onClick={() => setMenuPath(null)}><Brand /></Link>
       <p className="eyebrow side-label">Работно пространство</p>
       <nav aria-label="Основна навигация">
@@ -92,6 +98,9 @@ export function Workspace({ children, account }: { children: ReactNode; account:
         })}
       </nav>
       <div className="side-foot">
+        <div className="sidebar-user-card">{avatar}<div className="sidebar-user-info">
+          <strong className="sidebar-user-name">Вашият профил</strong><span className="sidebar-user-email" title={email}>{email}</span>
+        </div></div>
         {error && <Notice>Изходът не успя. Опитайте отново.</Notice>}
         <button type="button" disabled={busy} onClick={async () => {
           setBusy(true); setError(false);
@@ -101,17 +110,47 @@ export function Workspace({ children, account }: { children: ReactNode; account:
           } catch { setError(true); } finally { setBusy(false); }
         }}><LogOut size={19} /> {busy ? 'Излизане…' : 'Изход'}</button>
       </div>
-    </aside>
+  </>;
+
+  return <div className="shell">
+    <a className="skip-link" href="#main">Към съдържанието</a>
+    <aside className="sidebar desktop-sidebar">{navigation}</aside>
+    <dialog ref={drawer} className="sidebar navigation-drawer" id="navigation" aria-label="Меню на ExamForge"
+      onCancel={event => { event.preventDefault(); setMenuPath(null); }}
+      onClose={() => menuButton.current?.focus()}
+      onClick={event => { if (event.target === event.currentTarget) setMenuPath(null); }}>
+      <div className="drawer-content">
+        <button type="button" className="icon-button drawer-close" aria-label="Затвори менюто" autoFocus
+          onClick={() => setMenuPath(null)}><X size={20} /></button>
+        {menu && navigation}
+      </div>
+    </dialog>
     <div className="workspace">
       <header className="topbar"><div className="topbar-title">
-        <button type="button" className="icon-button mobile-menu" title="Меню" aria-label={menu ? 'Затвори менюто' : 'Отвори менюто'}
-          aria-controls="navigation" aria-expanded={menu} onClick={() => setMenuPath(menu ? null : pathname)}>{menu ? <X size={22} /> : <Menu size={22} />}</button>
-        <span>{title}</span></div>
+        <button ref={menuButton} type="button" className="icon-button mobile-menu" title="Меню" aria-label="Отвори менюто"
+          aria-controls="navigation" aria-expanded={menu} onClick={() => setMenuPath(pathname)}><Menu size={21} /></button>
+        <span className="topbar-page-name">{title}</span></div>
         <div className="topbar-actions"><ThemeToggle />
-          <Link href="/settings" prefetch={false} className="profile" title={email}><span className="avatar">{email.slice(0, 1).toUpperCase()}</span>
-            <span>{email}</span></Link></div>
+          <div className="profile-menu"
+            onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setProfileOpen(false); }}
+            onKeyDown={event => {
+              if (event.key === 'Escape' && profileOpen) {
+                event.preventDefault();
+                profileButton.current?.focus();
+                setProfileOpen(false);
+              }
+            }}>
+            <button ref={profileButton} type="button" className="profile" aria-label="Меню на профила" title={email}
+              aria-expanded={profileOpen} aria-controls="profile-links" onClick={() => setProfileOpen(open => !open)}>
+              {avatar}<span className="profile-email">{email}</span><ChevronDown size={15} aria-hidden="true" />
+            </button>
+            <div id="profile-links" className="profile-links" hidden={!profileOpen}>
+              <Link href="/settings" prefetch={false} onClick={() => setProfileOpen(false)}><Settings size={16} aria-hidden="true" /> Настройки на профила</Link>
+              <Link href="/privacy" prefetch={false} onClick={() => setProfileOpen(false)}><ShieldCheck size={16} aria-hidden="true" /> Поверителност</Link>
+            </div>
+          </div></div>
       </header>
-      <main id="main" className="page">{children}</main>
+      <main id="main" tabIndex={-1} className="page">{children}</main>
     </div>
   </div>;
 }

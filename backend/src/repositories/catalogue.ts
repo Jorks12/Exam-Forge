@@ -4,6 +4,7 @@ import { labels } from '../validators/schemas.ts';
 import type { CountFilters, Filters } from '../validators/schemas.ts';
 import type { Database, Sql } from './database.ts';
 import type { Question } from './bank.ts';
+import { questionSearchScore } from './question-search.ts';
 
 export interface Catalogue {
   grade: number;
@@ -20,13 +21,12 @@ const subjectList = `
   WHERE s.is_active AND ($1::int IS NULL OR sg.grade = $1) AND ($2::text IS NULL OR s.id = $2)
   GROUP BY sg.id, s.id ORDER BY sg.grade, s.name, s.id`;
 
-const filtered = `
+const filtered = (active: string) => `
   FROM examforge.catalogue_questions q
   JOIN examforge.catalogue_topics t ON t.id = q.topic_id
-  WHERE t.subject_grade_id = $1 AND q.is_active
+  WHERE t.subject_grade_id = $1 AND q.is_active = ${active}
     AND ($2::uuid IS NULL OR t.id = $2)
-    AND ($3::smallint IS NULL OR q.difficulty = $3)
-    AND ($4::text IS NULL OR strpos(lower(q.content), lower($4)) > 0)`;
+    AND ($3::smallint IS NULL OR q.difficulty = $3)`;
 
 export async function catalogueScope(sql: Sql, grade: number, subjectId: string) {
   return found((await sql.query<Catalogue & { id: string }>(`
@@ -61,28 +61,37 @@ export function catalogueRepository(db: Database) {
         LEFT JOIN examforge.catalogue_questions q ON q.topic_id = t.id AND q.is_active
         WHERE t.subject_grade_id = $1 GROUP BY t.id ORDER BY t.name, t.id`, [scope.id])).rows;
     },
-    async list(filters: Filters & { grade: number; subjectId: string }) {
+    async setQuestionActive(questionId: string, isActive: boolean) {
+      return found((await db.query(`
+        UPDATE examforge.catalogue_questions SET is_active = $2 WHERE id = $1 RETURNING id`,
+      [questionId, isActive])).rows[0]);
+    },
+    async list(filters: Filters & { grade: number; subjectId: string }, admin = false) {
       const { grade, subjectId, page, limit, active, topicId, difficulty, search } = filters;
       const scope = await catalogueScope(db, grade, subjectId);
-      if (active === 'false') return { items: [], total: 0, page, limit };
+      if (active === 'false' && !admin) return { items: [], total: 0, page, limit };
+      const score = questionSearchScore('$4', 'q.content', Boolean(search));
       const { rows: [data] } = await db.query(`
         WITH matches AS MATERIALIZED (
-          SELECT q.id, q.topic_id, t.name AS topic_name, q.content, q.difficulty, q.options ${filtered}
+          SELECT q.id, q.topic_id, t.name AS topic_name, q.content, q.difficulty, q.options,
+            ${score} AS search_score ${filtered('$7::boolean')} AND ${score} >= 0.5
         )
         SELECT (SELECT count(*)::int FROM matches) AS total,
           (SELECT coalesce(jsonb_agg(item), '[]'::jsonb)
-            FROM (SELECT * FROM matches ORDER BY topic_name, id LIMIT $5 OFFSET $6) item) AS items`,
-      [scope.id, topicId ?? null, difficulty ?? null, search ?? null, limit, (page - 1) * limit]);
+            FROM (SELECT id, topic_id, topic_name, content, difficulty, options
+              FROM matches ORDER BY search_score DESC, topic_name, id LIMIT $5 OFFSET $6) item) AS items`,
+      [scope.id, topicId ?? null, difficulty ?? null, search || null, limit, (page - 1) * limit, active !== 'false']);
       return { ...data, page, limit };
     },
     async counts(filters: CountFilters & { grade: number; subjectId: string }) {
       const scope = await catalogueScope(db, filters.grade, filters.subjectId);
+      const score = questionSearchScore('$4', 'q.content', Boolean(filters.search));
       return (await db.query(`
         SELECT count(*)::int AS active_count,
           count(*) FILTER (WHERE q.difficulty = 1)::int AS easy,
           count(*) FILTER (WHERE q.difficulty = 2)::int AS medium,
           count(*) FILTER (WHERE q.difficulty = 3)::int AS hard
-        ${filtered}`, [scope.id, filters.topicId ?? null, filters.difficulty ?? null, filters.search ?? null])).rows[0];
+        ${filtered('true')} AND ${score} >= 0.5`, [scope.id, filters.topicId ?? null, filters.difficulty ?? null, filters.search || null])).rows[0];
     },
   };
 }

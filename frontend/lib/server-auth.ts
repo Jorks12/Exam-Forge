@@ -15,7 +15,7 @@ const rememberAge = 60 * 60 * 24 * 30;
 const cookieOptions = { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax', path: '/' } as const;
 
 export function account(user: User): Account {
-  return { email: user.email ?? null, emailConfirmed: Boolean(user.email_confirmed_at) };
+  return { id: user.id, email: user.email ?? null, emailConfirmed: Boolean(user.email_confirmed_at) };
 }
 
 export async function verifiedAccount(): Promise<Account | null> {

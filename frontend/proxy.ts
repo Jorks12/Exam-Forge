@@ -15,7 +15,8 @@ export async function proxy(request: NextRequest) {
       pending.push({ name, value, options: sessionOptions(options, remember) });
     }
   });
-  const user = client ? (await client.auth.getUser()).data.user : null;
+  const candidate = client ? (await client.auth.getUser()).data.user : null;
+  const user = candidate?.email_confirmed_at ? candidate : null;
   if (user) incoming.set(accountHeader, encodeURIComponent(JSON.stringify(account(user))));
   const entry = request.nextUrl.pathname === '/login';
   let response: NextResponse;
@@ -34,5 +35,5 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: ['/login', '/dashboard/:path*', '/questions/:path*', '/exams/:path*',
-    '/history/:path*', '/analytics/:path*', '/results/:path*', '/settings/:path*'],
+    '/history/:path*', '/analytics/:path*', '/results/:path*', '/settings/:path*', '/review/:path*'],
 };

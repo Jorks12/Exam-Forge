@@ -25,7 +25,7 @@ interface RecordRow {
   explanation: string; difficulty: number; options: string[]; correct_index: number;
 }
 
-interface Bank {
+export interface Bank {
   grade: number;
   subject: string;
   records: RecordRow[];
@@ -38,7 +38,7 @@ function nearDuplicate(left: Set<string>, right: Set<string>) {
   return intersection / (left.size + right.size - intersection) >= 0.82;
 }
 
-function parseBank(text: string, grade: number, subject: string, fingerprints: Set<string>): Bank {
+export function parseBank(text: string, grade: number, subject: string, fingerprints = new Set<string>()): Bank {
   const records: RecordRow[] = [];
   const keys = new Set<string>();
   const topicKeys = new Set<string>();
@@ -91,6 +91,15 @@ function parseBank(text: string, grade: number, subject: string, fingerprints: S
     }
   }
   return { grade, subject, records };
+}
+
+export function duplicateQuestion(content: string, candidates: { content: string; source_key: string }[]) {
+  const pattern = template(content);
+  const words = shingles(pattern);
+  return candidates.find(candidate => {
+    const other = template(candidate.content);
+    return pattern === other || nearDuplicate(words, shingles(other));
+  });
 }
 
 export interface BankCount {

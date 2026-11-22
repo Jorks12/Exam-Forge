@@ -47,6 +47,6 @@
 | Гражданско образование | 50 | 50 | 50 |
 | **Общо** | **600** | **600** | **600** |
 
-Общият каталог има 1 800 активни въпроса. Допълването добави 1 317 към предишните 483. Съдържанието е за упражнение. Пълното съответствие с конкретна учебна програма изисква предметен преглед. [Програми за XII клас](https://mon.bg/obshto-obrazovanie/uchebni-planove-i-programi-2/uchebni-programi/uchebni-programi-za-obsthoobrazovatelna-podgotovka/xii-klas/), [профилирана подготовка](https://www.mon.bg/obshto-obrazovanie/uchebni-planove-i-programi-2/uchebni-programi/uchebni-programi-za-profilirana-podgotovka/).
+Първоначалният каталог достигна 1800 активни въпроса след допълване с 1317 към предишните 483. Следващото разширение добави още 1800 и достигна 3600 активни въпроса. Съдържанието е за упражнение. Пълното съответствие с конкретна учебна програма изисква предметен преглед. [Разширение](catalogue-expansion.md) · [Програми за XII клас](https://mon.bg/obshto-obrazovanie/uchebni-planove-i-programi-2/uchebni-programi/uchebni-programi-za-obsthoobrazovatelna-podgotovka/xii-klas/) · [Профилирана подготовка](https://www.mon.bg/obshto-obrazovanie/uchebni-planove-i-programi-2/uchebni-programi/uchebni-programi-za-profilirana-podgotovka/)
 
-Съществуващите частни въпроси за XII клас се отварят от личната банка. Техните първоначални теми, въпроси, опции и резултати остават достъпни през старите операции.
+Съществуващите въпроси за XII клас, собственост на администратора, се отварят от „Обща банка“. Резултатите от изпитите са достъпни за профила, който ги е решил.

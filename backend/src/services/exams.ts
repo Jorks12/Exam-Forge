@@ -4,7 +4,7 @@ import { balancedSelection } from '../algorithms/balancedSelection.ts';
 import { randomSelection } from '../algorithms/randomSelection.ts';
 import { attemptColumns, attemptItems, attemptRepository, lockAttempt } from '../repositories/attempts.ts';
 import type { Attempt, AttemptItem } from '../repositories/attempts.ts';
-import { eligibleQuestions, selectedQuestions } from '../repositories/bank.ts';
+import { eligibleQuestions, selectedQuestions, sharedBankOwner } from '../repositories/bank.ts';
 import { catalogueScope, eligibleCatalogueQuestions, selectedCatalogueQuestions } from '../repositories/catalogue.ts';
 import type { Database, Sql } from '../repositories/database.ts';
 import { ApiError, found } from '../utils/errors.ts';
@@ -110,13 +110,15 @@ export function examService(db: Database) {
   }
 
   return {
+    expireDue,
     async generate(userId: string, input: GenerateInput) {
       return db.transaction(async sql => {
         const scope = input.grade !== undefined && input.subjectId
           ? await catalogueScope(sql, input.grade, input.subjectId) : null;
+        const bankOwner = input.shared ? found(await sharedBankOwner(sql) ?? undefined) : userId;
         const { questions, topics } = scope
           ? await eligibleCatalogueQuestions(sql, scope.id, input.topicIds, input.difficulty)
-          : await eligibleQuestions(sql, userId, input.topicIds ?? [], input.difficulty);
+          : await eligibleQuestions(sql, bankOwner, input.topicIds ?? [], input.difficulty);
         if (input.questionCount > questions.length) {
           throw new ApiError(422, 'INSUFFICIENT_QUESTIONS', `Налични са ${questions.length} активни въпроса.`);
         }
@@ -141,7 +143,7 @@ export function examService(db: Database) {
           })),
         };
         const ids = chosen.map(question => question.id);
-        const selected = scope ? await selectedCatalogueQuestions(sql, ids) : await selectedQuestions(sql, userId, ids);
+        const selected = scope ? await selectedCatalogueQuestions(sql, ids) : await selectedQuestions(sql, bankOwner, ids);
         const metadata = scope && { grade: scope.grade, subject_id: scope.subject_id, subject_name: scope.subject_name };
         const { rows } = await sql.query<Attempt>(`
           WITH clock AS (SELECT date_trunc('milliseconds', clock_timestamp()) AS started)
@@ -211,6 +213,14 @@ export function examService(db: Database) {
     async overview(userId: string, filters: AnalyticsFilters) {
       await expireDue(userId);
       return repository.overview(userId, filters);
+    },
+    async analyticsSummary(userId: string, filters: AnalyticsFilters) {
+      await expireDue(userId);
+      const [overview, topics, progress, subjects] = await Promise.all([
+        repository.overview(userId, filters), repository.topics(userId, filters),
+        repository.progress(userId, filters), repository.subjects(userId, filters),
+      ]);
+      return { overview, topics, progress, subjects };
     },
     async topics(userId: string, filters: AnalyticsFilters) {
       await expireDue(userId);

@@ -1,18 +1,19 @@
 import { createClient } from '@supabase/supabase-js';
+import type { VerifyToken, VerifiedUser } from '../middleware/auth.ts';
 import { ApiError } from '../utils/errors.ts';
 
-export function verifySupabaseToken(url: string, key: string) {
+export function verifySupabaseToken(url: string, key: string): VerifyToken {
   const client = createClient(url, key, {
     auth: { autoRefreshToken: false, persistSession: false, detectSessionInUrl: false },
   });
-  const inFlight = new Map<string, Promise<string | null>>();
+  const inFlight = new Map<string, Promise<VerifiedUser | null>>();
 
   async function verify(token: string) {
     const { data, error } = await client.auth.getUser(token);
     if (error && (!error.status || error.status >= 500)) {
       throw new ApiError(503, 'AUTH_UNAVAILABLE', 'Услугата за вход временно е недостъпна.');
     }
-    return data.user?.id ?? null;
+    return !error && data.user?.email_confirmed_at ? { id: data.user.id, email: data.user.email } : null;
   }
 
   return (token: string) => {

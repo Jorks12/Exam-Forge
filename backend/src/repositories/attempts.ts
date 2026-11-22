@@ -109,12 +109,18 @@ export function attemptRepository(db: Database) {
     },
     async progress(userId: string, filters: AnalyticsFilters) {
       return (await db.query(`
-        ${analyticsScope}
-        SELECT * FROM (
-          SELECT id, title, submitted_at, round(100.0 * score / total_questions, 2)::float8 AS percentage
+        ${analyticsScope}, window_input AS (
+          SELECT id, title, submitted_at, 100.0 * score / total_questions AS percentage
           FROM exams
+          ORDER BY submitted_at DESC, id DESC LIMIT 54
+        ), visible AS (
+          SELECT id, title, submitted_at, round(percentage, 2)::float8 AS percentage,
+            round(avg(percentage) OVER (ORDER BY submitted_at, id ROWS BETWEEN 4 PRECEDING AND CURRENT ROW), 2)::float8
+              AS rolling_average
+          FROM window_input
           ORDER BY submitted_at DESC, id DESC LIMIT 50
-        ) recent ORDER BY submitted_at, id`, scopeValues(userId, filters))).rows;
+        )
+        SELECT * FROM visible ORDER BY submitted_at, id`, scopeValues(userId, filters))).rows;
     },
     async subjects(userId: string, filters: AnalyticsFilters) {
       return (await db.query(`
